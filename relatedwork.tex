@@ -1,0 +1,46 @@
+%!TEX root = paper.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Related Work}
+\label{sec:relatedwork}
+
+Recently, and very much in line with this paper, the \acrshort{ITU-T}
+published recommendation G.1032~\cite{mollertowards, itutg1032}, dealing with
+influence factors on gaming \gls{QoE}.
+The recommendation emphasizes that gaming \gls{QoE} depends on multiple
+influence factors, several of which this paper studies,
+particularly the category of context influence factors.
+The recommendation lists these factors,
+but does not evaluate them. This paper does so, both through a survey
+among video gamers (for subjective factors) and a study of
+game platforms (for objective factors).
+
+Literature on video game \gls{QoE} is often based on
+direct measurements of game and network parameters. However, the
+rich variety of video game contents makes it difficult to generalize
+the results. This paper's attempt to better understand said variety,
+and the consumers' views of it, is thus an endeavor to support future
+research into video game and gaming \gls{QoE}.
+%On itself, this paper does not provide quality-related studies on gameplay.
+Work supporting this view \cite{7965676,7503835} analyzed single specific
+games from different genres and different game sub-scenarios within
+them, complementing \acrshort{MOS} value studies with questionnaire-based
+assessments of delay detection, quality acceptance, difficulty,
+annoyance etc.
+
+Research efforts of the past were often centered around network \acrshort{QoS}, e.g. on the network delay component of the \gls{E2E} lag for both online games and cloud gaming. The results, however, remain inconclusive. Past studies of multiplayer games also often focused on a single genre, namely \glspl{FPS}, with titles such as \textit{Quake 3}~\cite{1266180} or \textit{Unreal Tournament 2003}~\cite{Beigbeder:2004:ELL:1016540.1016556}. Concerning cloud gaming, Chen et al.~\cite{6670099} find very high and variable delay values even when neglecting the network delay. Furthermore, \cite{Choy:2012:BSC:2501560.2501563} gives some insights on the delay requirements of streamed games and the implications for data center distance as well as placement.
+Image quality represents a further \gls{QoE} factor. Gaming adds
+another dimension to typical image quality assessments, as most
+games allow for changes to their graphical fidelity.
+%, be it either the resolution or more demanding graphical features, such as ambient occlusion or anti-aliasing. Cloud gaming usually locks these options at one specific setting for a specific quality-to-resource-demand trade-off, resulting in an often lower source quality than what local games can offer.
+As an example, the work in \cite{slivarimpact} takes a look at different encoding parameters for cloud gaming. %, but does unfortunately not conduct a full-reference analysis nor investigates the impact of the coding latency.
+An overview of some further \gls{QoE} taxonomy and influence factors especially for mobile games is given in \cite{beyer2014typedisplaydelayimpact}.
+%Several efforts~\cite{Jarschel20132883,6614351} also set up
+%subjective tests of cloud gaming services with specific \gls{QoS}
+%parameters in mind.
+
+For video streaming applications, \gls{QoE} context
+monitoring and context-based \gls{QoE} management has proven to be
+worthwhile~\cite{7140480}. The factors are grouped by
+their source, i.e. the gamer, the hardware/software/network system,
+and the context (including the gamer's social embedding, novelty,
+and game service factors).

@@ -1,0 +1,300 @@
+%!TEX root = paper.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Background}
+\label{sec:background}
+This section introduces system influencing factors and service factors
+of current gaming systems:
+It presents the hardware and software platforms and ecosystems
+for different types of gaming, introduces utility metrics for games,
+and describes the data sources used for the evaluations in this paper.
+Furthermore, the gamer survey is described.
+All costs are from an European, specifically German, perspective. If a
+product is not available in this region, the prices are converted using
+the most recent currency exchange rates.
+
+\subsection{Gaming Hardware}\label{sec:gaming-hardware}
+
+\subsubsection{Gaming \acrshort{PC}s}
+Hardware viable for \gls{PC} gaming starts at about $\text{\texteuro} 500$ but
+has practically no upper limit for enthusiasts. The \gls{GPU}
+is a cost driver, and it is essential for modern \gls{PC} gaming.
+This poses a certain financial barrier for customers to start \gls{PC} gaming,
+which is however compensated by an increased flexibility and longevity of
+hardware.
+
+\subsubsection{Video Game Consoles}
+Dedicated consoles represent the classical approach to video gaming.
+The price for (non-portable) consoles varies but usually lies between
+$\text{\texteuro} 300$ and $\text{\texteuro} 400$ for the latest console
+generation, i.e., \textit{Switch}, \textit{PlayStation 4}, and
+\textit{Xbox One}.
+While priced lower than \glspl{PC}, console hardware is not componentized
+and not upgradeable as easily.
+
+\subsubsection{Cloud Gaming Hardware}
+One of the main claimed benefits of \gls{cg} is its low requirements
+on end user hardware. Thus, a less powerful \gls{PC} may suffice to
+use a \gls{cg} service as long as the network connection to the
+service provides an adequate latency and bandwidth.
+Sony's \psnow \gls{cg} service was originally available only for their
+PlayStation 3 and 4 consoles, and a line of their TV sets. The latter
+option has since been removed, and streaming to \glspl{PC} enabled
+instead.
+% https://www.playstation.com/en-gb/explore/playstation-now/ps-now-on-pc/
+Companies also experiment with devices that focus exclusively on streaming
+\gls{cg} content. The most recent standalone game streaming device currently
+in the market is NVIDIA's \textit{SHIELD} which starts at
+$\text{\texteuro} 230$ and is bound to their \gls{cg} service, \gfnow.
+% Price via Amazon.de
+Here, too, a stream-to-\gls{PC} option has become available recently
+(as a US-only beta programme).
+% https://www.nvidia.com/en-us/geforce/products/geforce-now/mac-pc/
+
+
+
+\subsection{Gaming Ecosystems}
+Below, currently active (cloud and non-cloud) gaming platforms are examined
+with regards to pricing models, other requirements, and costs. The
+information presented was collected between July 2015 and October 2017.
+%Table~\ref{tab:game-services} overviews these platforms, and also
+%mentions some that shut down in the timeframe.
+
+\subsubsection{\gls{PC} Gaming}
+\label{sec:pcgaming}
+
+The rise of easy-to-use digital distribution platforms and the
+independent (``indie'') game scene reinvigorated \gls{PC} gaming just a few
+years ago. Today, \gls{PC} gaming is dominated by digital marketplaces,
+with \steam being the largest. The platform has about $10$ million
+concurrent users at most times of the day. It periodically offers large,
+often seasonal, sales of recent games at greatly reduced prices (rebates
+of 75\% for a year-old game are not uncommon). In addition, many
+resellers offer digital codes for other platforms, often at much lower
+prices.
+% Alternative storefronts, entirely independent from \steam, also exist, such as \textit{GOG}\footnote{\url{https://www.gog.com/}}.%, and enrich the competition even more.
+Major releases on PC are usually priced between $\text{\texteuro} 50$
+and $\text{\texteuro} 60$. However, due to the competition between the
+vendors, the digital retail prices are significantly lower even at
+launch, and also drop more quickly. Another recent trend are game
+bundles, which especially prevail in the indie games scene, commonly
+offered with a pay-what-you-want model. \textit{Humble
+Bundle}\footnote{\url{https://www.humblebundle.com/}} is a prominent
+example.
+% Number of games >>> what consoles have
+
+%recurring bundles/subscriptions (humble monthly)
+%	console/netflix similarities
+
+% Steam Sales:
+% Large seasonal sales (christmas, summer, lunar new year, halloween, fall, spring, ...) of many/most games on the platform usually rebates of 50\% and up.
+% Weekly sales
+% Daily sales
+% Weekend sales
+% Free weekends
+
+
+
+
+\subsubsection{Video Game Consoles}
+
+New, major game releases are mostly priced at either
+$\text{\texteuro} 60$ or $\text{\texteuro} 70$. Once on the market, the
+game prices decrease rather slowly. In recent years, retail stores have
+been complemented with console-specific, proprietary digital
+distribution services that also offer the latest game at the full price.
+These official stores are usually exclusive vendors for digital game
+codes where competitors are excluded.
+%, meaning that there will be no competition that quickly reduces prices.
+Subscription fees often apply for the multiplayer mode of games, e.g.,
+\textit{PlayStation Plus} or \textit{Xbox Live Gold} with annual prices
+of $\text{\texteuro} 50$ and $\text{\texteuro} 60$, respectively. These
+services also include access to a small, monthly changing palette of
+older titles.
+
+% generally offer a monthly rotating palette of (older or smaller) game titles included in the subscription.
+
+
+
+\subsubsection{\Gls{cg} Ecosystems}
+
+NVIDIA's \gls{cg} platform%\footnote{\url{https://shield.nvidia.com/games/geforce-now}}
+\gfnow
+is available in North America and select European countries.
+In Germany the service currently offers $55$ PC titles
+for a monthly subscription fee of $\text{\texteuro} 10$. An additional
+per-game one-time fee
+is charged for the access to $63$ other games.
+The service is delivered from six
+specialized data center locations (Dublin and Frankfurt in Europe).
+
+The service requires a rather steep
+\SI{50}{\mega\bit\per\second} for a full
+1080p60 stream%\footnote{\label{foot:rate}This
+%\SI{60}{\hertz} frame rate represents the rate of the video encoder.
+%The game's actual frame rate might be considerably lower depending on
+%the complexity of the game.} (\SI{10}{\mega\bit\per\second} in
+%order to use the service at all) and a maximum \acrshort{RTT} of
+%SI{60}{\milli\second} to one of the data centers. In addition,
+Streaming is exclusive to \textit{SHIELD} devices.
+The \gfnowpc beta program streams to \glspl{PC}, and costs
+\$\SIrange{10}{20}{} per hour of usage depending on the desired
+visual quality.
+
+% Started in parts of Europe in Q4/2015
+
+\psnow, Sony's cloud gaming service, offers to stream titles from previous
+PlayStation generations, as the latest console generation lacks
+backwards compatibility.
+% It is currently available in North America and
+%the UK, with a closed beta running in other European countries and
+%Japan. The offered titles and exact pricing vary from country to
+%country. For the UK, about $190$ titles are available, and most titles
+%are covered by the monthly subscription fee of about $\text{\texteuro}
+%17$. All titles are also available through a separate rental service,
+%costing about $\text{\texteuro} 4$ for \SI{48}{\hour} and
+%$\text{\texteuro} 10$ for one month of access.
+The service offers 432 games for a monthly flat rate of
+$\text{\texteuro}17$.
+This is in addition to
+the device cost: the service is available on PlayStation 4 and 3
+consoles and, recently, \glspl{PC}.
+Streaming is performed at a resolution of
+720p60 requiring a \SI{5}{\mega\bit\per\second}
+connection.
+% Reports on the video quality have been rather
+%mixed.\footnote{\url{http://www.eurogamer.net/articles/digitalfoundry-2015-%hands-on-with-playstation-now}}
+% Sony is also reportedly using specialized server hardware, adapted from regular PlayStation 3s, effectively eliminating any chance for multi-purpose uses of these devices. This could lower scalability gains.
+
+% cost and some more infos:
+% http://www.pocket-lint.com/news/126394-playstation-now-subscription-service-comes-to-the-uk-what-is-it-and-how-can-you-get-it
+
+% (US/UK only?) Deuschlandbeta seit ~Q4/2015
+
+%Like \gfnowpc, \liquid is a \gls{cr} service. Here, \SI{80}{\hour} of
+%gameplay are included in the $\text{\texteuro}20$ monthly subscription;
+%games must be purchased separately, and a local streaming device
+%(of any kind) is needed.
+%
+%\textsc{GameFly} is a recent offer for set-top boxes, but little
+%other detail is public at the time of writing.
+
+
+\subsection{Utility Metrics}
+
+Utility metrics help to estimate the value of a service for a customer.
+It should be noted that no single metric is likely of value by itself,
+yet all metrics combined can absolutely influence customer decisions.
+
+The first basic metric is the number of games offered. A larger number
+means more choice for the customer, but ``spam'' phenomena need to
+be considered, as large offers might include many games of sub-par quality.
+Second, the number of players already owning a game can be a
+motivating factor for other customers to choose the same game.
+One may interpret this as a form of preferential attachment.
+This is particularly interesting for decidedly online games, i.e.
+such where players interact in the game environment over the network,
+so that more interactions are possible if more players are online.
+
+Then, games are priced differently, both within and across
+platforms. Many games are offered completely free of charge.
+Some are funded indirectly through in-game purchases. On the
+other end of the spectrum, titles whose development was expensive
+and for which the audience anticipation is high might sell
+for a higher price. Furthermore, game lengths come to mind.
+Games range from very short (on the order of minutes) to tens, or even
+hundreds, of hours (for games with an extensive storyline),
+but need not be limited at all (e.g. explorative or ``open world'' games).
+%Game length should thus be considered differently depending on
+%the player type. For casual gamers, shorter games probably have
+%more appeal, as their limited playtime is more likely to allow
+%players to complete them. ``Hardcore'' gamers that spend more
+%time gaming overall might find longer games more engaging.
+Overall, neither mode intrinsically offers higher utility.
+
+Next, the age of games (per their original release date) is of
+interest. Some players favor the newest games, others prefer ``classics'', 
+which additionally often implies a preference for a specific aesthetic (e.g.
+``8-bit'' graphics); any focus or combination thereof will likely attract
+specific proportions of customers. Also, newer games tend to also be featured
+in the media (and in advertising, increasing their publicity),
+offer a greater diversity in game mechanics and control,
+% Wii once was new!
+and improved technical aspects (resolution, scene complexity).
+
+There also exist considerable amounts of secondary literature about
+games in the form of reviews. These can be viewed as social factor,
+in that gamers might be drawn to positively-reviewed titles more
+strongly, or rather stay away from less favorably reviewed ones.
+Some media aggregate reviews from many outlets and
+are thus of particular interest for an analysis. Many other utility
+metrics are imaginable, including combinations of the metrics mentioned above.
+
+\subsection{Objective Data Sources}
+In order to investigate the utility metrics described, data was collected from
+multiple sources and merged
+%(with a few instances of omission and
+%double-count)
+into a data base. In the interest of repeatability and
+reproducibility, all of the data reported on in this work, as well as
+the code used to collect and process it, can be found in public
+repositories\footnote{[Blinded for review]}.
+%\footnote{The repository resides at
+%\url{https://github.com/mas-ude/cost-of-cloud-gaming}}.
+Data were joined on game names and platforms (where appropriate).
+The different data sources are described in the following.
+For \steam, the public \acrshort{REST} \acrshort{API} was used to
+fetch the name and current price of each game at different points in
+time.
+%\footnote{\url{https://github.com/mas-ude/steam-data-stats}}.
+This data was combined with \acrshort{API} data from the 3rd-party site
+\textit{SteamSpy}\footnote{\url{https://steamspy.com}}, which parses all
+publicly visible \steam user profiles and
+estimates statistics on the size of the player base and the time each
+player spends with a title. \textit{SteamSpy} also provides a heuristic
+projection of the total number of owners of each listed title on \steam.
+For \gfnow, game names and prices were screen-scraped manually.
+Game names for \psnow is available from the PlayStation
+website\footnote{\url{https://www.playstation.com/de-de/explore/playstation-now/ps-now-games/}}.
+Thus, the platform portfolios can be compared.
+
+Game publishers seldom publish intended playthrough
+length of games, and not all games necessarily have one. However, players
+may self-report their experienced playthrough times on sites like
+\hltb\footnote{\url{http://howlongtobeat.com/}}, which was web-scraped
+for this analysis\footnote{[Blinded for review]}.
+%\footnote{\url{https://github.com/mas-ude/gamelengths-scraper}}.
+%Reported times are separated into different play styles, e.g., ``main story'' for players that just finish the main objectives of a game, or ``completionist'' for those who explore the game to the fullest extent. Only an aggregate time over all reports per play style is shown for every game. (For our analysis, we average over all play styles for every game.) %It should however be stressed again, that this is a self-reporting site without strong validity checks, which has to be considered when contemplating the accuracy of the data.
+Lastly, the age of a game is computable from its release date. To this end, the
+\metacritic\footnote{\url{http://www.metacritic.com/}} page which
+aggregates reviews of video games (and other media) was
+scraped~[anonymized].
+%\footnote{\url{https://github.com/mas-ude/metacritic_scraper}}.
+
+
+
+\subsection{Subjective Data}
+
+The subjective data for this paper was collected through an online
+survey using the \textsc{SoSci Survey} web tool. The link was shared
+in the authors' social networks, and posted in various sub-forums on
+the \textsc{Reddit} online community web page.
+The survey included 9 demographic questions, 12 questions about the
+participants' personal gaming habits and history, and 7 service/system
+influence related questions, not all of which are evaluated in full
+in this paper.
+In order to keep the time to completion reasonable, most questions
+were stated either as yes/no questions, or showed predefined answers
+to be ranked on a five-level Likert scale, e.g. from ``extremely
+important'' to ``not important at all''.
+The complete questionnaire and anonymized responses
+are reproduced at~[anonymized].
+The survey was completed by 488 participants.
+
+The context influence factors surveyed include social context (such
+as the importance of online aspects in games and the influence of
+friends and social media on buying decisions), novelty (in the sense
+of new, recently published games), and service factors (referring to
+properties of online marketplaces with respect to the utility metrics
+discussed before.) Furthermore, system influence factors such as
+the preferred gaming hardware platform and available input devices
+are studied.

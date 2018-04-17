@@ -1,0 +1,218 @@
+%!TEX root = paper.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Supply-Side Efficiency Modeling} % OR ONLY: THE SUPPLIER'S PROBLEM
+\label{sec:suppliermodelling}
+
+This section assesses the supply-side of the cloud gaming market with a strong focus on costs. The remainder of this section first clarifies typical cost factors in the cloud gaming market and then continues with a specific efficiency model formulation that responds to the demand-side findings of previous sections.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Cost Factors}
+
+The dominating cost factor in cloud gaming is the server infrastructure, both in terms of \gls{CAPEX} and \gls{OPEX}. The low latency requirements of many games requires a regionally-oriented cloud infrastructure, i.e., regional data centers are used to provide high-quality and low-latency service. Due to the specific demands of games, specialized hardware is used (e.g., with GPU-enabled CPUs), rather than generic cloud servers. These factors increase the \gls{CAPEX} for cloud service operators, but also lower the efficiency of the system, as more generic and more globalized cloud services cloud yield scaling advantages. Moreover, the rental of generic cloud service hardware or resources seems to be unrealistic due to the lowered efficiency --- cloud services are typically data-centric, while gaming is graphics-intense. The \gls{OPEX} is limited to maintenance activities, consumables, Internet access fees and energy.
+
+In addition, game license fees have to be considered as noteworthy \gls{CAPEX} (or potentially also \gls{OPEX}). Depending on the licensing model, a flat license (one-time price for an unlimited number of subscribers), volume licenses, or per-use or per usage fees may be arranged with license owners. In all cases, scaling effects probably exist: the initial \gls{CAPEX} is high, while marginal costs decrease for additional subscribers.
+
+On the customer-side, the subscription or per-game prices represent costs that create the revenue for the cloud gaming provider and for the game license owners. Customers typically also require specific gaming hardware to connect to the platform, which can be cheaper than high-end gaming hardware, but may lower the added value over hardware-intensive conventional gaming approaches.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Model}
+
+Based on the collected consumer price figures, this section will elaborate on the required computational efficiency, i.e., cost per hosted subscriber, in order to successfully establish cloud gaming approaches on the market. Due to the limited available data, this investigation will follow a single data center assumption. Due to the demands of cloud gaming to serve both at high performance and low latency, regional data centers will play a dominant role in the provider side cost modeling. Following this assumption, hereinafter a specific model is created that characterizes at which cost efficiency levels the cloud gaming business can be operated successfully.
+
+\begin{figure}[!t]
+	\centering
+	\includegraphics[width=0.75\columnwidth]{images/overbooking_datacenterNG.pdf}
+	\caption{Overbooking of available computational capacity.}
+\label{fig:overbooking_datacenter}
+\end{figure}
+
+The model (Figure~\ref{fig:overbooking_datacenter}) is motivated as follows. A cloud gaming operator must provide a certain data center capacity $Cap$ of slots for the maximum number of gamers that can play simultaneously, so as to provide sufficient availability and quality. This incurs an overall cost of $\mathcal{C}_{Cap}$. Active players recruit from the overall number of subscribers, denoted as the total service demand $d$. In general, not all subscribers will play at the same time. This allows for an overbooking factor $\epsilon$ on the data center resources so that $Cap \cdot \epsilon = d$. The larger the overbooking factor can be made without impacting quality for active players, the smaller the data center capacity may be dimensioned. %, saving costs.
+The overall cost must not exceed the average price $\bar{p}$ paid by a subscriber times the the number of subscribers;
+%$\mathcal{C}_{Cap} \leq \bar{p} \cdot d = \bar{p} \cdot Cap \cdot \epsilon$.
+scaling this limit to the number of concurrently active users yields the maximum cost per active user that the operator can spend
+
+\begin{equation}
+  \phantom{\text{.}}\mathcal{C}_u = \frac{\mathcal{C}_{Cap}}{Cap} \leq \frac{\bar{p} \cdot d}{Cap} = \frac{\bar{p} \cdot Cap \cdot \epsilon}{Cap} = \bar{p} \cdot \epsilon\text{.}
+\end{equation}
+
+To interpret this relationship, estimates for the overbooking factor and average price are discussed. The costs of the regional data center (\gls{CAPEX}, \gls{OPEX}, required game licensing fees) are treated as a black box to simplify the treatment.
+
+A reasonable value for the overbooking factor $\epsilon$ may be derived from the number of active \steam user over the course of two days. As observed\footnote{\url{http://store.steampowered.com/stats/}} between 2016-02-16 and 18, between $6.53$\si{\mega} and $11.65$\si{\mega} users were connected simultaneously. To gain a conservative estimate, the maximum is set in relationship to the $75$ million registered \steam users\footnote{\url{http://venturebeat.com/2014/01/15/steam-has-75-million-registered-users-third-party-steam-controllers-and-other-tidbits-from-valves-dev-days/}}, and calculate an $\epsilon_{\text{Steam}}\approx6.44$. For cross-validation purposes, link load levels for other media streaming services may be considered: When comparing the relative load level change between the minimum and maximum utilization of a large Vietnamese \acrshort{ISP}'s \gls{VoD} streaming server as given in \cite{thanh2012enabling}% (reconstructed data for Thursday in Fig 2. as most peaky day)
+, the growth from Steam's minimum to its maximum utilization can be rescaled accordingly. A maximum number of simultaneously connected \gls{VoD} users of $58.3$ million and an $\epsilon_{\text{sub}}$ of $1.29$ are obtained. The discrepancy in overbooking factors may appear high, but the different associated payment modalities may be at cause: While \steam sells game licenses (of which the buyer may make use any time), \gls{VoD} services often use a subscription services (a flat rate for a given time period). For the subsequent analysis the range between the minimum of $\epsilon_{\text{sub}}$ and maximum of $\epsilon_{\text{Steam}}$ is considered.
+
+The average price $\bar{p}$ is also parameterized on the basis of the collected \steam data. %This data does, however, not reveal the actual $\bar{p}$ for a game, which also includes the historic price changes, but only the current price and the volume of sold games. In this respect, we can distinguish the average price for the current portfolio (portfolio price) and weighted according to the known volume (weighted price) for the assessment times of Summer 2015, end of October 2015 and March 2016 --- see Tbl.
+To reflect the range of the data (see Tbl.~\ref{tab:steam-price-stats}), the minimum and the maximum values are used as inputs for the subsequent cost considerations: $\bar{p}_{\text{min}} = 5.30$, $\bar{p}_{\text{max}} = 12.39$. (For comparison, the monthly subscription rate for \psnow UK is roughly $\text{\texteuro} 16.53$.)
+
+Lastly (but ignored in the model), the operator may expect a profit margin of \SI{3}{\percent}\footnote{\url{http://www.polygon.com/2012/10/1/3439738/the-state-of-games-state-of-aaa}} to \SI{16.9}{\percent}\footnote{\url{http://www.forbes.com/sites/georgeanders/2015/04/23/amazons-web-services-delight-16-9-margins-more-joy-ahead/\#73324aa64b4e}} (or even higher\footnote{\url{http://www.bloomberg.com/news/articles/2015-12-02/microsoft-should-disclose-cloud-revenue-margins-ballmer-says}}). Requiring a higher profit margin transitively lowers the maximum cost per active user that the operator can tolerate. %will be able to spend.
+
+Applying the different mean prices and $\epsilon$ values, it can be inferred that the monthly capacity and licensing cost per peak time user $\mathcal{C}_u$ must not exceed $\epsilon_{\text{sub}} \cdot \bar{p}_{\text{min}} = \text{\texteuro} 6.81$ (lower bound scenario) to $\epsilon_{\text{Steam}} \cdot \bar{p}_{\text{max}} =\text{\texteuro} 79.80$, both excluding a profit margin. Scaling these costs to \steam's peak time population of $11.65\si{\mega}$ yields ranges for the maximum allowable server capacity costs $\mathcal{C}_{\text{Cap}}$ per month of $\text{\texteuro} 79.4M$ to $\text{\texteuro} 929.3M$ for a cloud game service of the size of \steam.
+%For comparison, using the \psnow UK subscription price as a basis yields per-user costs of \SI{21.27}{\EUR} to \SI{106.46}{\EUR} depending on the overbooking factor; maximum allowable capacity costs then range from \SI{1.24}{\giga\EUR} to \SI{2.21}{\giga\EUR}.
+
+%BREAKING EVEN. The model formulation indicates several ways of achieving this. First, the costs for the provided capacity should be minimal. This is a challenge both in terms of hardware cost and licensing expenses. It obviously helps to keep the data center capacity small, but this works only to a certain extent before it limits the value that active users get, e.g. as the availability decreases. Second, a large subscriber base helps; even more so if its playing habits allow for a large overbooking factor: More subscribers translate directly to more income, while more overbooking reduces data center costs. Lastly, the operator may adjust the subscription price, although at the possible expenses of either scaring off customers, or increasing the system's popularity so that supply cannot keep up with demand.
+
+%What can an operator do with regards to the cost structure?
+In that respect, cost optimizations beside the classical capacity dimensioning also deserve attention. Due to the requirement of using special gaming equipment, however, sharing hardware with other cloud applications seems unrealistic. Thus $\mathcal{C}_u$ can hardly be reduced by cloud service collaboration. However, to lower the investment demands, the platform operator could aim at increasing the overbooking ratio $\epsilon_{sub}$ for the subscription case closer to the $\epsilon_{steam}$ of the classical purchasing model. The provider could, for example, offer off-peak subscriptions that allow the access to the platform only outside of peak hours.
+
+Furthermore, the maximum per-user cost figures do not consider that the operator may not be able to fully utilize the available capacity or may not hold the optimal game licenses at all times. Thus, in practice, target $\mathcal{C}_{u}$ values should be lower than the calculated values.
+
+Nevertheless, this cost perspective still points to an interesting observation: the low $\epsilon_{sub}$ requires a data center capacity closer to the total service demand. Thus, subscription-based cloud gaming approaches have a higher cost pressure than in the case of a more conventional game sales approach ($\epsilon_{steam}$). When setting the cost perspective in relationship to the product offers, the business challenges of cloud-based game providers become apparent. In particular, the high cost pressures seem to lead to a tightly curated game offering approach --- i.e., a small number of offerings (see Tbl.~\ref{fig:rel-combinedlength-owners}), good overall scores (see Figure~\ref{fig:scores-by-platform}) --- where only economically attractive games can be offered for subscription plans. This is very likely caused by the underlying scale-oriented licensing practices that favor high volumes --- i.e., the initial \gls{CAPEX} is high, but the marginal cost decrease afterwards. The limited game offering for cloud-based services, as a result of cost factors and limited scaling advantages on the hardware side, however, reduces the utility for the customer, which should lower their willingness-to-pay. Obviously, this induces a particularly challenging business environment in which operators go out of business on a regular basis. This further explains why cloud gaming has remained a small niche despite the high interest by industry, research and probably also customers.
+
+%and  $58.3m$ users, we obtain a total server capacity cost $\mathcal{C}_{Cap}$, which should not exceed XXX and XXX Euro resp. 
+
+%the capacity and licensing cost per user $\mathcal{C}_u$ needs to be below XXXXXXXX (for $\epsilon_{max}$)  or XXXX Euro ($\epsilon_{min}$) for obtaining the required minimum margin $m$. 
+
+
+%Thus, we can characterise that the successful cloud game provider will have a maximum $C_{u}$ in the following bounds:
+% for a successful market operation.
+
+
+
+
+
+
+%by deploying subscription models that foster the off-peak usage, i.e., off-peak subscriptions that allow the access to the platform only outside of peak hours. This may allow a convergence of $C_u$ for subscription-based charging models close to $\epsilon_{max}$.
+
+%When considering a substantial increase of the $\epsilon$ to $8$---the realistic maximum when considering the high peak time centricity of the gaming use case---, we obtain a substantially lowered $C_{u}$ requirement of $6.44$. 
+
+%\todo[inline]{ADD DATA}
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsection{Platform Provider Cost Factors}
+%Backend/Service Requirements and Demands
+
+%%%%%%%%%%%%
+%\subsubsection{CAPEX}
+
+%\begin{itemize}
+%	\item Regionale Data Center
+%	\item Gaming Server (GPU-Enabled)
+%	\item Entwicklungskosten für Software-Plattform(?)
+%\end{itemize}
+
+%\paragraph{Hardware}
+
+%\url{https://www.nvidia.com/object/cloud-gaming-gpu-boards.html}
+%\url{https://www.nvidia.com/object/grid-technology.html}
+
+
+%%%%%%%%%%%%
+%\subsubsection{OPEX}
+
+%\paragraph{Verkehrsvolumen}
+
+%\begin{itemize}
+%	\item Internetanbindung?
+%	\item Caching of basic resources is probably not applicable?
+%\end{itemize}
+
+%\paragraph{Serverlaufzeiten}
+
+%\begin{itemize}
+%	\item Energie
+%	\item Verschleiß
+%	\item Wartungs- und Betriebspersonal oder Anmietung
+%	\item Frage: Rechnet sich Anmietung von Ressourcen bei großen generischen Rechenzentren? Annahme nein, da man selbst ein großer Anbieter wäre u. die Margin wegfallen. Auf der anderen Seite gibt es Hardware die für Games im Serverbereich besser skalieren? Wenn ja, kann umso mehr kein generischer Anbieter die Lösung sein
+%\end{itemize}
+
+%\paragraph{Spiele-Lizenzen und -Adaptionskosten (?)}
+%Modelannahme: Kosten pro Nutzung (realistisch eher in Blöcken verrechnet)
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\subsection{Computational Efficiency}
+
+
+%In a digital storefront like \steam, customers download games quasi-asynchronously (i.e. differences in the time to completion on the order of seconds or minutes hardly matter), and later run the games on their own machines. In contrast to that, a cloud gaming platform renders games in data centers, and streams 
+
+%Before we discuss ways for the operator to break even, i.e. achieving an income that exceeds the cost, estimates for the overbooking factor and average price are discussed.
+
+%Global Games statistics / billion revenues 2012-2016: http://newzoo.com/infographics/global-games-market-report-infographics-2013/
+% Game industry = 3%: http://www.polygon.com/2012/10/1/3439738/the-state-of-games-state-of-aaa
+% Game industry in the past (2009 – average console game with margin of 40%): http://www.businessinsider.com/casual-gaming-profit-margins-near-90-2009-10?IR=T
+% Profit margins in cloud computing:
+%	Amazon 16.9% (2015): http://www.forbes.com/sites/georgeanders/2015/04/23/amazons-web-services-delight-16-9-margins-more-joy-ahead/#73324aa64b4e
+% 	Microsoft 44% (2015) -- questionable: http://www.bloomberg.com/news/articles/2015-12-02/microsoft-should-disclose-cloud-revenue-margins-ballmer-says
+
+%connected user $u$ at peak .
+
+%\begin{equation}
+%	ce = \frac{C_{cap}}{Cap} \quad .
+%\end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%SOME DATA CONSIDERATIONS:
+
+
+% ALTE DATEN:
+% Anderer Messpunkt:
+% Höchststand (simultaneous): 12 406 722 Nutzer maximal, Feb 13 - Feb 15
+% Peak immer abends. Niedrigster Wert bei <7.5 Mio Nutzern
+% => \epsilon von 75/12,406722 = 6,0451100621
+% Eigentlich, da steam wächst, > 6 eine gute Annahme. Wir könnten versuchen Schranken zu definieren.
+% Wenn wir annehmen, dass Skalierung gut funktioniert, benoetigen wir keinen Buffer. Sollen wir Buffer verwenden?
+
+% NEUE DATEN:
+% ANGLE 1:
+%According to http://venturebeat.com/2014/01/15/steam-has-75-million-registered-users-third-party-steam-controllers-and-other-tidbits-from-valves-dev-days/
+% Customer base of Steam was 75 Million active users in 2014. 
+% %Vermutlich Nutzerzahl mittlerweile hoeher. Schaetzungen waeren also konservativ ausgerichtet.
+%According to http://store.steampowered.com/stats/?l=german
+% Testzeitraum: Feb 16 – 18
+% Höchststand (simultaneous): 11 645 185	 Nutzer maximal
+%	-> Anteil Grundgesamtheit: 0.1552691333
+%	-> Epsilon: 6.4404301005 (75/11,645185)
+% Tiefststand (simultaneous): 6 527 571 
+%	-> Relatives Wachstum: 1.7839997451 = 78%
+
+% ANGLE 2: 
+% Data from ``Enabling Experiments for Energy-Efficient Data Center Networks on OpenFlow-based Platform''
+% Data is on server loads for video traffic (Video on Demand) of a big ISP in Vietnam
+% Does not give indications on parent population. So, we will compare the steam data with this data in a relativ fashion.
+% Thursday values in Fig 2. are most peaky. So we take them.
+% Höchststand: 71.190% at 17.530 (da time. Half past 5)
+% Tiefststand: 7.971 % at 7.88 (day time time. Almost 8 o'clock – nobody watches video)
+% 	-> Relatives Wachstum: 8.9311253293 = 893.1%
+% Umgelegt vom Mindesstand bei Steam waere das dann:
+%	6 527 571 * 8.9311253293 = 58.298.554,697 (geringfuegig verschoeben zu den initialen Daten%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Another data point: https://www.heise.de/newsticker/meldung/Playerunknown-s-Battlegrounds-10-Millionen-Mal-verkauft-fast-1-Million-gleichzeitige-Spieler-3823136.html
+% TL;DR: A new game came out, sold 10 million copies within 6 months
+% (5 million over the last 2 months actually), and there are
+% almost 1 million concurrent players. Given the relatively short
+% timeframes, this is perhaps a good example of overall buyers vs
+% peak active population, 5:1 to 10:1 in this case.
+
+%\todo[inline]{NOW LET'S ADD THE DATA. Check the 12.4m. E.g. user older data. Introduce customer base data and reasoning above. Illustrate that epsilon will be around 6.}
+
+
+%NOW CALCULATE:
+% EPSILON_SUB 1.2931034483
+% EPSILON_STEAM: 6.44 
+% EPSILON: Between 1.2931034483 AND 6.44
+% AVG PRICE: Between 5.304493 AND  12.39184 
+% M: 3% => 1.03
+% CALCULATION:
+%
+% Case 1: 1.2931034483 * 5.304493 / 1.03 = 6.6594739707
+% Case 2: 1.2931034483 * 12.39184 / 1.03 = 15.557214597
+% Case 3: 6.44 * 5.304493 / 1.03 = 33.165956233
+% Case 4: 6.44 * 12.39184 / 1.03 = 77.479077282
+
+
+% Per-user min prices from `supply_side_efficiency.R`, excluding margin.
+%
+%               Steam low price Steam high price  PS Now UK price
+%sub eps               6.818351         15.93950         21.26554
+%Steam low eps        34.134280         79.79693        106.46031
