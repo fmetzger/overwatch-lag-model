@@ -3,12 +3,12 @@
 \section{Examining Individual Lag Components}
 \label{sec:lagmodel}
 
-% \begin{figure}[t]
-% 	\centering
-% 	\includegraphics[width=1.0\columnwidth]{images/e2e-lag-model.pdf}
-% 	\caption{Basic \acrshort{E2E} lag model. Adapted from \cite{Metzger+2016}.}
-% \label{fig:e2e-lag-model}
-% \end{figure}
+\begin{figure*}[t]
+	\centering
+	\includegraphics[width=1.0\textwidth]{images/e2e-lag-model.pdf}
+	\caption{Basic \acrshort{E2E} lag model. Adapted from \cite{Metzger+2016}.}
+\label{fig:e2e-lag-model}
+\end{figure*}
 
 In any video game a multitude of cogs is working in unison to transform a player's inputs into meaningful actions inside the game world. Besides additional lag incurred through the input and output devices' hardware (i.e. in this case mouse/keyboard as well as the monitor) --- which can on their own still be significant\footnote{See, e.g. the investigation of keyboard latency at \url{https://danluu.com/keyboard-latency/}, in some cases exceeding \SI{50}{\milli\second}.}. The components (and the corresponding terminology) investigated here are outlined in \cite{Metzger+2016}, and are 
 \begin{enumerate*}[label=(\alph*)]
@@ -22,23 +22,26 @@ In any video game a multitude of cogs is working in unison to transform a player
 %
 % --- all lag components examined in this work are depicted in Fig.~\ref{fig:e2e-lag-model}. 
 %
-For this experiment several regular matches (in the default mode with two teams of six players each) were played on a PC that can not maintain a stable frame rate of \SI{60}{\hertz} at all times. Packet traces of the game's UDP traffic were recorded on the same PC and are the basis for this examination. The code for models derived here as well as the modified simulation will be made available.
+For this experiment several regular matches (in the default mode with two teams of six players each) were played from the perspective of one player on one PC that can not maintain a stable frame rate of \SI{60}{\hertz} throughout the match. Packet traces of the game's UDP traffic were recorded on the same PC and are the basis for this examination. The code for models derived here as well as the updated simulation is available in the repository that hosts this paper\footnote{\url{https://github.com/fmetzger/overwatch-lag-model}}.
 
 
 \subsection{Command Messages}
 
+% TODO: state the nature of this figure: it is a fringe case, no such behavior could be observed on a computer with sufficient resources (and thus stable \SI{60}{\hertz} frame rate)
 \begin{figure}[t]
 	\centering
 	\includegraphics[width=1.0\columnwidth]{images/command-density.pdf}
-	\caption{Density plot of the command messages the client sends, showing a bimodal behavior instead of the expected single mode at \SI{16.7}{\milli\second}.}
+	\caption{Continuous density plot of the command messages the client sends, showing a bimodal behavior instead of the expected single mode at \SI{16.7}{\milli\second}.}
 \label{fig:command-density}
 \end{figure}
 
-These are the messages the game clients sends to the server containing all the player's inputs during that cycle. The developers of \textsc{Overwatch} advertise a tick rate (i.e. the frequency the server updates its game state) of \SI{60}{\hertz} (or an \gls{IAT} of about \SI{16.7}{\milli\second}. Therefore, one would assume that the command message rate behaves similarly. However, when looking at the density of the message \glspl{IAT} in Fig.~\ref{fig:command-density}, two modes are revealed, one at around \SI{24}{\milli\second} (or a send rate of \SI{42}{\hertz}) and the other one at \SI{12}{\milli\second} (\SI{83}{\hertz}). These modes are not distributed uniformly across the match but are rather separated into distinct transmission phases as the time series in Fig.~\ref{fig:command-timeseries} reveals. The duration of the match can be divided into two alternating phases. The first phase reveals a (weak) third mode centered around \SI{16.7}{\milli\second}, i.e. the expected behavior of the game to send its inputs at a rate of \SI{60}{\hertz} to the server. But in the second phase, the game sends with both the \glspl{IAT} observed in Fig.~\ref{fig:command-density} at a ratio of about four to one in favor of the \SI{12}{\milli\second} intervals. In order to model this behavior, the trace was split at those phases and each phase modeled separately. The \SI{60}{\hertz} phases were fitted to a Gamma distribution with $\Gamma(\alpha = 4.437922, \beta = 208.366)$, the second phases were mixed by a Gamma distribution $\Gamma(\alpha = 49.32119, \beta = 3970.154)$ for the \SI{83}{\hertz} portion and a Normal distribution $\mathcal{N}(\mu = 0.02359103, \sigma = 0.001369922)$ for \SI{42}{\hertz}). Finally, the phase lengths are giving by a set of two Normal distributions. $\mathcal{N}(\mu = 28.85714, \sigma = 1.216385)$ models the length of the unimodal \SI{60}{\hertz} phase, and $\mathcal{N}(\mu = 40.83333, \sigma = 2.054805)$ gives the length of the bimodal phase. A random sample generated with this model is depicted in the left panel of Fig.~\ref{fig:command-timeseries}.
+These are the messages the game clients sends to the server containing all the player's inputs during that cycle. The developers of \textsc{Overwatch} advertise a tick rate (i.e. the frequency the server updates its game state) of \SI{60}{\hertz} (or an \gls{IAT} of about \SI{16.7}{\milli\second}. Therefore, one would assume that the game's transmission behavior targets the same values to incorporate all player decisions (i.e. inputs) in each update cycle and notify them of the resulting game state. However, when looking at the density of the command message \glspl{IAT} in Fig.~\ref{fig:command-density}, two modes are revealed, one at around \SI{24}{\milli\second} (or a send rate of \SI{42}{\hertz}) and the other one at \SI{12}{\milli\second} (\SI{83}{\hertz}). Even though the overall mean \gls{IAT} is \SI{17.9}{\milli\second} and thus just slightly longer than required for the potentially targeted transmission rate of \SI{60}{\hertz}. These modes are not distributed uniformly across the match but are rather separated into distinct transmission phases as the time series in Fig.~\ref{fig:command-timeseries} reveals. The duration of the match can be divided into two alternating phases. The first phase reveals a (weak) third mode centered around \SI{16.7}{\milli\second}, i.e. the expected behavior of the game to send its inputs at a rate of \SI{60}{\hertz} to the server. But in the second phase, the game sends with both the \glspl{IAT} observed in Fig.~\ref{fig:command-density} at a ratio of about four to one in favor of the \SI{12}{\milli\second} intervals. In order to model this behavior, the trace was split at those phases and each phase modeled separately. The \SI{60}{\hertz} phases were fitted to a Gamma distribution with $\Gamma(\alpha = 4.437922, \beta = 208.366)$, the second phases were mixed by a Gamma distribution $\Gamma(\alpha = 49.32119, \beta = 3970.154)$ for the \SI{83}{\hertz} portion and a Normal distribution $\mathcal{N}(\mu = 0.02359103, \sigma = 0.001369922)$ for \SI{42}{\hertz}). Finally, the phase lengths are giving by a set of two Normal distributions. $\mathcal{N}(\mu = 28.85714, \sigma = 1.216385)$ models the length of the unimodal \SI{60}{\hertz} phase, and $\mathcal{N}(\mu = 40.83333, \sigma = 2.054805)$ gives the length of the bimodal phase. A random sample generated with this model is depicted in the left panel of Fig.~\ref{fig:command-timeseries}.
 
+
+% TODO: Reason or broaden the y-axis tick labels; currently only the labels for the three mode centers are shown
 \begin{figure}[t]
 	\centering
-	\includegraphics[width=1.0\columnwidth]{images/command-ts-annotated.pdf}
+	\includegraphics[width=1.0\columnwidth]{images/command-ts-annotated.png}
 	\caption{Time series of the client-sent command messages both measured in the experiment as well as generated from the model. The different phases are highlighted.}
 \label{fig:command-timeseries}
 \end{figure}
@@ -85,7 +88,7 @@ These are the messages the game clients sends to the server containing all the p
 
 	\begin{figure}[t]
 		\centering
-		\includegraphics[width=1.0\columnwidth]{images/update-ts.pdf}
+		\includegraphics[width=1.0\columnwidth]{images/update-ts.png}
 		\caption{Time series of the received game state update messages. The game phases and non-interactive ``kill cam'' events are clearly visible.}
 	\label{fig:update-timeseries}
 	\end{figure}
