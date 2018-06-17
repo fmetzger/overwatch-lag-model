@@ -12,7 +12,7 @@
 
 In any video game a multitude of cogs is working in unison to transform a player's inputs into meaningful actions inside the game world. A simplified depiction of the processes a player action must go through before finally being to able to be displayed in a multiplayer game with an authoritative server is given in Fig.~\ref{fig:e2e-lag-model}. 
 
-Besides additional lag incurred through the input and output devices' hardware (i.e. in this case mouse,keyboard and monitor) --- which can on their own still be significant\footnote{See, e.g. the investigation of keyboard latency at \url{https://danluu.com/keyboard-latency/}, in some cases exceeding \SI{50}{\milli\second}.}. The components (and the corresponding terminology) investigated here are outlined in \cite{Metzger+2016}, and are 
+Besides additional lag incurred through the input and output devices' hardware (i.e. in this case mouse, keyboard, and monitor) --- which can on their own still be significant\footnote{See, e.g. the investigation of keyboard latency at \url{https://danluu.com/keyboard-latency/}, in some cases exceeding \SI{50}{\milli\second}.}. The components (and the corresponding terminology) investigated here are outlined in \cite{Metzger+2016}, and are 
 %
 \begin{itemize}
 	\item the generation of the input events by the player,
@@ -75,7 +75,7 @@ In order to model this behavior, the trace was split at those phases and each ph
 	\label{fig:update-density}
 	\end{figure}
 
-	The next lag component is the distribution of the game state update messages that the game server sends periodically to each connected game client. Ideally, such an update should be send immediately after every game simulation ``tick''. A time series of the client's packet reception \glspl{IAT} of one match is depicted in Fig.~\ref{fig:update-timeseries}. There are a few properties of note here, that clearly indicate that the server's messaging behavior depends on the game state even though the tick rate targets a rate of \SI{60}{\hertz}. 
+	The next lag component is the distribution of the game state update messages that the game server sends periodically to each connected game client. Ideally, such an update should be transmitted immediately after every game simulation ``tick''. A time series of the client's packet reception \glspl{IAT} of one match is depicted in Fig.~\ref{fig:update-timeseries}. There are a few properties of note here, that clearly indicate that the server's messaging behavior depends on the game state even though the tick rate targets a rate of \SI{60}{\hertz}. 
 
 	The first block of very short \glspl{IAT} directly maps to the pick phase of \textsc{Overwatch}, where each player picks the hero (or class) she is going to play during this match. The next, short phase (visible by less spread in the samples) is the warmup phase, where both teams can not yet leave their respective starting areas and thus no meaningful action can occur. Only after this phase the actual game starts and the spread of the \gls{IAT} increases, possibly hinting at increased load at the server side. Similar the final phase of less sample spread depicts the game after the match has ended and the players see match statistics as well as a replay of a noteworthy event in the match (the ``Play of the Game'').
 

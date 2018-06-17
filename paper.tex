@@ -1,5 +1,5 @@
 %!TEX program = pdflatex
-\documentclass[conference]{IEEEtran}
+\documentclass[a4paper,conference]{IEEEtran}
 
 \usepackage{ifluatex}
 \ifluatex
@@ -69,7 +69,22 @@ University of Duisburg-Essen, Germany\\
 
 \maketitle
 
+% TODO: - the introduction is fragmentary and badly written;
 
+% TODO: Perform proof-reading of the paper to correct minor spelling/grammar mistakes and (as stated in the previous part of the review) provide more details on distributions for readers with less mathematical knowledge. Minor improvements regarding readability of the paper, especially mathematical background, would be to provide either references or some overview information on distributions(Gamma, Normal,Cauchy).
+
+% TODO: - Investigate auto-correlation and influence factors (additional delay, packet loss, smaller time-scales) on the lag.
+
+% TODO: - The paper does the implicit assumption that the lag can be models as independent processes and there is no investigation of correlations/auto-correlation on smaller time scales. 
+% TODO: - There is only one network configuration evaluated. Additional delay in the network or packet loss may also change the sending behavior of the client and/or server.
+% TODO: - It is unclear how the models can be generalized. The measurements cover only one set of parameters.
+
+% TODO: Proofread the paper, there are some minor punctuation issues and some double words and more. You should also consider to consult a native english speaker and let him rephrase the "worst" parts -> there is a lot of german grammar ... 
+
+% TODO: I don't see any major weakness in this paper. It would be good to elaborate more on the investigation to help unfamiliar readers to understand the overall approach. Moreover, some background and related work would helpful to highlight the scientific contribution. However, this would very likely exceed the page limit.
+
+% TODO: - The proposed methodology and model, as pointed out by the same Authors, is highly specific to the kind of game and to the deployment scenario (e.g., characteristics and resource availability at the player's PC). Which generality? Possibility to apply to different deployment scenarios? How?
+% TODO: - There are no quantitative results showing that the proposed modeling is well fitting the experimental results about lag that can be directly measured in in-the-field experimentation. How to validate in-the-field the proposed model?
 
 \input{acronyms.tex}
 \input{abstract.tex}
