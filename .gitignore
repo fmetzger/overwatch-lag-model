@@ -1,6 +1,8 @@
 *.DS_Store
 paper.pdf
 
+.Rhistory
+
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
@@ -222,3 +224,4 @@ TSWLatexianTemp*
 
 # expex forward references with \gathertags
 *-tags.tex
+.Rproj.user
